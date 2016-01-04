@@ -73,13 +73,19 @@ class InstanceCalculator(object):
         self.max_instances = max_instances
         self.scaling_factor = scaling_factor
 
+    def _normalise_instances(self, instances):
+        return min(max(self.min_instances, instances), self.max_instances)
+
     def _scale_down_instances(self):
         new_instances = int(math.floor(self.current_instances / self.scaling_factor))
-        return max(self.min_instances, new_instances)
+        return self._normalise_instances(new_instances)
 
     def _scale_up_instances(self):
-        new_instances = int(math.ceil(self.current_instances * self.scaling_factor))
-        return min(self.max_instances, new_instances)
+        if self.current_instances == 0:
+            new_instances = 1
+        else:
+            new_instances = int(math.ceil(self.current_instances * self.scaling_factor))
+        return self._normalise_instances(new_instances)
 
     @property
     def _calculator_funcs(self):
