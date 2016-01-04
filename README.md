@@ -2,6 +2,7 @@ stretch
 =======
 
 [![Build Status](https://travis-ci.org/paddycarey/stretch.svg?branch=master)](https://travis-ci.org/paddycarey/stretch)
+[![Docker Pulls](https://img.shields.io/docker/pulls/paddycarey/stretch.svg)](https://hub.docker.com/r/paddycarey/stretch/)
 
 Dead simple autoscaling for Marathon.
 
