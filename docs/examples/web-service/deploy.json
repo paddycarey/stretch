@@ -1,0 +1,41 @@
+{
+  "id": "stretch-example-web-service",
+  "cpus": 0.1,
+  "mem": 64,
+  "instances": 2,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "paddycarey/stretch-example-web-service:v1",
+      "forcePullImage": false,
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 0,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "healthChecks": [
+    {
+      "path": "/",
+      "protocol": "HTTP",
+      "portIndex": 0,
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 10,
+      "timeoutSeconds": 5,
+      "maxConsecutiveFailures": 3
+    }
+  ],
+  "labels": {
+    "SCALING_FACTOR": "1.5",
+    "SCALING_MIN_INSTANCES": "2",
+    "SCALING_MAX_INSTANCES": "8",
+    "SCALING_TRIGGER_00_TYPE": "http",
+    "SCALING_TRIGGER_00_URL": "/status/metrics/",
+    "SCALING_TRIGGER_00_LOWER_THRESHOLD": "25",
+    "SCALING_TRIGGER_00_UPPER_THRESHOLD": "100"
+  }
+}

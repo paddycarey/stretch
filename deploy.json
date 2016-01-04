@@ -1,0 +1,18 @@
+{
+  "id": "stretch",
+  "cpus": 0.1,
+  "mem": 64,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "paddycarey/stretch:v1",
+      "forcePullImage": false,
+      "network": "BRIDGE"
+    }
+  },
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 0,
+    "maximumOverCapacity": 0
+  }
+}
