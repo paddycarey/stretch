@@ -1,0 +1,118 @@
+{
+  "id": "\/web-service",
+  "cmd": null,
+  "args": [],
+  "user": null,
+  "env": {},
+  "instances": 2,
+  "cpus": 0.1,
+  "mem": 64,
+  "disk": 0,
+  "executor": "",
+  "constraints": [],
+  "uris": [],
+  "storeUrls": [],
+  "ports": [
+    10000
+  ],
+  "requirePorts": false,
+  "backoffSeconds": 1,
+  "backoffFactor": 1.15,
+  "maxLaunchDelaySeconds": 3600,
+  "container": {
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "paddycarey\/stretch-example-web-service:v1",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 0,
+          "servicePort": 10000,
+          "protocol": "tcp"
+        }
+      ],
+      "privileged": false,
+      "parameters": [],
+      "forcePullImage": false
+    }
+  },
+  "healthChecks": [
+    {
+      "path": "\/",
+      "protocol": "HTTP",
+      "portIndex": 0,
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 10,
+      "timeoutSeconds": 5,
+      "maxConsecutiveFailures": 3,
+      "ignoreHttp1xx": false
+    }
+  ],
+  "dependencies": [],
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 1,
+    "maximumOverCapacity": 1
+  },
+  "labels": {
+    "SCALING_FACTOR": "1.5",
+    "SCALING_MIN_INSTANCES": "two",
+    "SCALING_MAX_INSTANCES": "",
+    "SCALING_TRIGGER_00_TYPE": "http",
+    "SCALING_TRIGGER_00_URL": "\/status\/metrics\/",
+    "SCALING_TRIGGER_00_LOWER_THRESHOLD": "25",
+    "SCALING_TRIGGER_00_UPPER_THRESHOLD": "100"
+  },
+  "version": "2016-01-04T00:18:38.760Z",
+  "tasksStaged": 0,
+  "tasksRunning": 2,
+  "tasksHealthy": 2,
+  "tasksUnhealthy": 0,
+  "deployments": [],
+  "tasks": [
+    {
+      "id": "web-service.c3df1b3e-b0f6-11e5-966b-56847afe9799",
+      "host": "10.141.141.10",
+      "ports": [
+        31000
+      ],
+      "startedAt": "2016-01-02T02:16:00.801Z",
+      "stagedAt": "2016-01-02T02:15:59.930Z",
+      "version": "2016-01-02T02:15:54.516Z",
+      "appId": "\/web-service",
+      "healthCheckResults": [
+        {
+          "alive": true,
+          "consecutiveFailures": 0,
+          "firstSuccess": "2016-01-04T01:03:27.361Z",
+          "lastFailure": null,
+          "lastSuccess": "2016-01-04T01:04:17.440Z",
+          "taskId": "web-service.c3df1b3e-b0f6-11e5-966b-56847afe9799"
+        }
+      ]
+    },
+    {
+      "id": "web-service.c6daa7ff-b0f6-11e5-966b-56847afe9799",
+      "host": "10.141.141.10",
+      "ports": [
+        31002
+      ],
+      "startedAt": "2016-01-02T02:16:05.835Z",
+      "stagedAt": "2016-01-02T02:16:04.933Z",
+      "version": "2016-01-02T02:15:54.516Z",
+      "appId": "\/web-service",
+      "healthCheckResults": [
+        {
+          "alive": true,
+          "consecutiveFailures": 0,
+          "firstSuccess": "2016-01-04T01:03:27.361Z",
+          "lastFailure": null,
+          "lastSuccess": "2016-01-04T01:04:17.440Z",
+          "taskId": "web-service.c6daa7ff-b0f6-11e5-966b-56847afe9799"
+        }
+      ]
+    }
+  ],
+  "lastTaskFailure": null
+}

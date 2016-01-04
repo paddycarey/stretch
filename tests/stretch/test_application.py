@@ -13,6 +13,18 @@ def configured_app():
     return application.Application(app_json)
 
 
+@pytest.fixture
+def configured_app_missing_tasks():
+    app_json = fixture_loader.json_fixture("web-service-missing-tasks")
+    return application.Application(app_json)
+
+
+@pytest.fixture
+def badly_configured_app():
+    app_json = fixture_loader.json_fixture("web-service-badly-configured")
+    return application.Application(app_json)
+
+
 @pytest.mark.parametrize("property_name,expected", [
     ("app_id", "/web-service"),
     ("instances", 2),
@@ -34,6 +46,14 @@ def test_application_parsing_new_instances(configured_app):
 
 def test_application_parsing_validate(configured_app):
     assert configured_app.validate()
+
+
+def test_application_parsing_validate_missing_tasks(configured_app_missing_tasks):
+    assert not configured_app_missing_tasks.validate()
+
+
+def test_application_parsing_validate_badly_configured(badly_configured_app):
+    assert not badly_configured_app.validate()
 
 
 @pytest.mark.parametrize("instances,min_instances,max_instances,scaling_factor,scaled_up,scaled_down", [

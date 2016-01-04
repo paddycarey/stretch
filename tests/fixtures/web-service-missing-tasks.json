@@ -1,0 +1,74 @@
+{
+  "id": "\/web-service",
+  "cmd": null,
+  "args": [],
+  "user": null,
+  "env": {},
+  "instances": 2,
+  "cpus": 0.1,
+  "mem": 64,
+  "disk": 0,
+  "executor": "",
+  "constraints": [],
+  "uris": [],
+  "storeUrls": [],
+  "ports": [
+    10000
+  ],
+  "requirePorts": false,
+  "backoffSeconds": 1,
+  "backoffFactor": 1.15,
+  "maxLaunchDelaySeconds": 3600,
+  "container": {
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "paddycarey\/stretch-example-web-service:v1",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 0,
+          "servicePort": 10000,
+          "protocol": "tcp"
+        }
+      ],
+      "privileged": false,
+      "parameters": [],
+      "forcePullImage": false
+    }
+  },
+  "healthChecks": [
+    {
+      "path": "\/",
+      "protocol": "HTTP",
+      "portIndex": 0,
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 10,
+      "timeoutSeconds": 5,
+      "maxConsecutiveFailures": 3,
+      "ignoreHttp1xx": false
+    }
+  ],
+  "dependencies": [],
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 1,
+    "maximumOverCapacity": 1
+  },
+  "labels": {
+    "SCALING_FACTOR": "1.5",
+    "SCALING_MIN_INSTANCES": "2",
+    "SCALING_MAX_INSTANCES": "8",
+    "SCALING_TRIGGER_00_TYPE": "http",
+    "SCALING_TRIGGER_00_URL": "\/status\/metrics\/",
+    "SCALING_TRIGGER_00_LOWER_THRESHOLD": "25",
+    "SCALING_TRIGGER_00_UPPER_THRESHOLD": "100"
+  },
+  "version": "2016-01-04T00:18:38.760Z",
+  "tasksStaged": 0,
+  "tasksRunning": 2,
+  "tasksHealthy": 2,
+  "tasksUnhealthy": 0,
+  "deployments": [],
+  "lastTaskFailure": null
+}
